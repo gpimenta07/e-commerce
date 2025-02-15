@@ -145,6 +145,8 @@ export function applyDiscount(products) {
 const sidebarPrice = document.querySelector('#sidebar-price-btn');
 const inputHundred = document.querySelector('#hundred');
 const hundredLabel = document.querySelector('#hundred-label');
+const inputTwoHundred = document.querySelector('#twohundred');
+const twohundredLabel = document.querySelector('#twohundred-label');
 
 sidebarPrice.addEventListener('click', () => {
   if (inputHundred.classList.contains('hidden')) {
@@ -156,6 +158,16 @@ sidebarPrice.addEventListener('click', () => {
   }
 });
 
+sidebarPrice.addEventListener('click', () => {
+  if (inputTwoHundred.classList.contains('hidden')) {
+    inputTwoHundred.classList.remove('hidden');
+    twohundredLabel.classList.remove('hidden');
+  } else {
+    inputTwoHundred.classList.add('hidden');
+    twohundredLabel.classList.add('hidden');
+  }
+});
+
 //Function: show products above $100
 function showHundredProducts(products) {
   return products.filter((product) => product.price >= 100);
@@ -164,6 +176,20 @@ function showHundredProducts(products) {
 inputHundred.addEventListener('change', () => {
   if (inputHundred.checked) {
     const filtered = showHundredProducts(products);
+    renderProduct(filtered);
+  } else {
+    renderProduct(products);
+  }
+});
+
+// Function: show products above 200$
+function showTwoHundredProducts(products) {
+  return products.filter((product) => product.price >= 200);
+}
+
+inputTwoHundred.addEventListener('change', () => {
+  if (inputTwoHundred.checked) {
+    const filtered = showTwoHundredProducts(products);
     renderProduct(filtered);
   } else {
     renderProduct(products);
